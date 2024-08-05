@@ -51,7 +51,7 @@ def create_contact(request):
         form=ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('clients-home'))
+            return redirect(reverse('contacts-home'))
     else:
         form = ContactForm()
     return render(request, 'clients/create_contact.html', {'form': form})
@@ -62,7 +62,7 @@ def create_site(request): # create a site
         form=SiteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('clients-home'))
+            return redirect(reverse('sites-home'))
     else:
         form = SiteForm()
     return render(request, 'clients/create_site.html', {'form': form})
@@ -112,7 +112,7 @@ def update_client(request, pk): # update a client
             return redirect(reverse('clients-home'))
     else:
         form = ClientForm(instance=client)
-    return render(request, 'clients/update_client.html', {'form': form})
+    return render(request, 'clients/update_client.html', {'form': form, 'client': client})
 
 
 def update_contact(request, pk): # update a contact
@@ -121,10 +121,10 @@ def update_contact(request, pk): # update a contact
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect(reverse('clients-home'))
+            return redirect(reverse('contacts-home'))
     else:
         form = ContactForm(instance=contact)
-    return render(request, 'clients/update_contact.html', {'form': form})
+    return render(request, 'clients/update_contact.html', {'form': form, 'contact': contact})
 
 
 def update_site(request, pk): # update a site
@@ -133,10 +133,10 @@ def update_site(request, pk): # update a site
         form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
-            return redirect(reverse('clients-home'))
+            return redirect(reverse('sites-home'))
     else:
         form = SiteForm(instance=site)
-    return render(request, 'clients/update_site.html', {'form': form})
+    return render(request, 'clients/update_site.html', {'form': form, 'site': site})
 
 
 # delete views
@@ -154,7 +154,7 @@ def delete_contact(request, pk): # delete a contact
     contact = get_object_or_404(Contact, pk=pk)
     if request.method == 'POST':
         contact.delete()
-        return redirect(reverse('clients-home'))
+        return redirect(reverse('contacts-home'))
     return render(request, 'clients/delete_contact.html', {'contact': contact}) 
 
 
@@ -162,5 +162,5 @@ def delete_site(request, pk): # delete a site
     site = get_object_or_404(Site, pk=pk)
     if request.method == 'POST':
         site.delete()
-        return redirect(reverse('clients-home'))
+        return redirect(reverse('sites-home'))
     return render(request, 'clients/delete_site.html', {'site': site})

@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         <input class="rounded px-5 py-2 bg-red-300 hover:cursor-pointer" type="submit" value="Delete">
-        <a href="{% url 'client-detail' client.id %}" class="rounded px-5 py-2 bg-gray-300 hover:cursor-pointer">Cancel</a>
+        <a href="{% url 'client-detail' client.id %}" class="rounded px-6 py-2.5 bg-gray-300 hover:cursor-pointer">Cancel</a>
     </form>
 </div>
 {% endblock %}
