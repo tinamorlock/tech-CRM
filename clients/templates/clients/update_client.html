@@ -1,0 +1,13 @@
+{% extends 'clients/_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">Update Client Information</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="rounded px-5 py-2 bg-green-300 hover:cursor-pointer" type="submit" value="Update">
+    </form>
+</div>
+{% endblock %}

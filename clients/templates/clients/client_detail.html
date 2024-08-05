@@ -1,0 +1,46 @@
+{% extends 'clients/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">{{ clients.company }}</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p>Industry: {{ clients.industry }}</p>
+                <p>Hourly Rate: {{ clients.hourly_rate }}</p><br>
+                <hr><br><br>
+                {% if clients.contact %}
+                    <p>Contact: {{ clients.contact.first_name }} {{ clients.contact.last_name }}
+                        <a href="mailto:{{ clients.contact.email }}"><u>Send Email</u></a>
+                    </p>
+                {% else %}
+                    <p>No contact assigned</p><br><br>
+                    <a href="{% url 'create-contact' %}">
+                        <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Contact
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </a>
+                {% endif %}
+                <br><br>
+                <h1 class="text-2xl font-bold">{{ clients.company }}'s Locations</h1><br>
+                <ul>
+                    {% for site in sites %}
+                        <li>{{ site.site_name }}</li>
+                    {% endfor %}
+                </ul><br>
+                <hr><br><br>
+                <h1 class="text-2xl font-bold">{{ clients.company }}'s Employees</h1><br>
+                {% for employee in employees %}
+                    {{ employee.first_name }} {{ employee.last_name }} — {{ employee.job_title }} — 
+                <a href="mailto:{{ employee.email }}"><u>Email</u></a></p>
+                {% endfor %}
+                <br><br>
+                <a href="{% url 'update-client' clients.pk %}"><p class="rounded-full bg-green-200 px-6 py-2 w-40">Update Client</p></a><br><br>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

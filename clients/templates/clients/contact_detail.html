@@ -1,0 +1,23 @@
+{% extends 'clients/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">{{ contact.first_name }} {{ contact.last_name }}</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <a href="{% url 'client-detail' contact.company.pk %}"><p>Company: <u>{{ contact.company.company }}</u></a></p><br>
+                <p>Email: <a href="mailto:{{ contact.email }}"><u>{{ contact.email }}</u></a></p>
+                <p>Job Title: {{ contact.job_title }}</p><br>
+                <p>Office Phone: {{ contact.office_phone }}</p><br>
+                <p>Cell Phone: {{ contact.cell_phone }}</p><br>
+                <p>Home Phone: {{ contact.home_phone }}</p><br>
+                <br><br>
+                <a href="{% url 'update-contact' contact.pk %}"><p class="rounded-full bg-green-200 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        
