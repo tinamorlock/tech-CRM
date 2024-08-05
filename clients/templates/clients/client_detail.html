@@ -27,7 +27,7 @@
                 <h1 class="text-2xl font-bold">{{ clients.company }}'s Locations</h1><br>
                 <ul>
                     {% for site in sites %}
-                        <li>{{ site.site_name }}</li>
+                        <li><a href="{% url 'site-detail' site.pk %}"><u>{{ site.site_name }}</u></a></li>
                     {% endfor %}
                 </ul><br>
                 <hr><br><br>
