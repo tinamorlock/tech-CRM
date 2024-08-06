@@ -22,8 +22,7 @@ class Ticket(models.Model):
 
 class TicketUpdate(models.Model):
     update = models.TextField()
-    tech_first_name = models.CharField(max_length=100)
-    tech_last_name = models.CharField(max_length=100)
+    tech = models.ForeignKey('Technician', on_delete=models.CASCADE, related_name='ticket_tech', null=True, blank=True)
     is_resolved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -31,4 +30,18 @@ class TicketUpdate(models.Model):
 
 
     def __str__(self):
-        return f'{self.ticket.title} — Updated by {self.tech_first_name} {self.tech_last_name} — Resolved: {self.is_resolved}'
+        return f'{self.ticket.title} — Updated by {self.tech.first_name} {self.tech.last_name} — Resolved: {self.is_resolved}'
+    
+
+class Technician(models.Model):
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return f'Tech: {self.first_name} {self.last_name}'

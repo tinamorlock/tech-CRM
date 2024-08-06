@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Ticket, TicketUpdate, Technician
+
+admin.site.register(Ticket)
+admin.site.register(TicketUpdate)
+admin.site.register(Technician)
