@@ -64,7 +64,7 @@ def update_invoice(request, invoice_id):
         form = InvoiceForm(request.POST, instance=invoice)
         if form.is_valid():
             form.save()
-            return redirect(reverse('invoices-home'))
+            return redirect(reverse('invoice-detail', kwargs={'invoice_id': invoice_id}))
     else:
         form = InvoiceForm(instance=invoice)
     context = {
@@ -83,7 +83,7 @@ def update_line_item(request, line_item_id):
         form = LineItemForm(request.POST, instance=line_item)
         if form.is_valid():
             form.save()
-            return redirect(reverse('invoices-home'))
+            return redirect(reverse('line-item-detail', kwargs={'line_item_id': line_item_id}))
     else:
         form = LineItemForm(instance=line_item)
     context = {

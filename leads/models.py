@@ -24,5 +24,5 @@ class LeadNote(models.Model):
 
 
     def __str__(self):
-        return f'{self.status} — {self.lead.first_name} {self.lead.last_name}'
+        return f'{self.note} — {self.lead.first_name} {self.lead.last_name} with {self.lead.company}'
     

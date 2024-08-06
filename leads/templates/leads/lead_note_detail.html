@@ -1,0 +1,21 @@
+{% extends 'leads/_base.html' %}
+
+{% block content %}
+
+    <div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Lead Note for {{ lead_note.lead.first_name }} {{ lead_note.lead.last_name }} 
+            at {{ lead_note.lead.company }}</h1><br>
+        </h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p>{{ lead_note.note }}</p><br>
+                <p>Created: {{ lead_note.created_at }}</p><br>
+                <br><br>
+                <a href="{% url 'update-lead-note' lead_note.id%}"><p class="rounded bg-green-500 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

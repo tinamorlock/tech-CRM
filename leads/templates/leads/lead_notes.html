@@ -1,0 +1,15 @@
+{% extends 'leads/_base.html' %}
+{% block content %}
+<div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
+    <h1 class="text-4xl mb-2">Lead Notes</h1>
+    {% for note in lead_notes %}
+    <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
+        <div class="flex justify-between items-center pb-6">
+            <p class="text-2xl">{{ note.lead.company }} — {{ note.note }} </p>
+            <a href="{% url 'lead-note-detail' note.pk %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

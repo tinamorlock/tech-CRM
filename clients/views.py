@@ -109,7 +109,7 @@ def update_client(request, pk): # update a client
         form = ClientForm(request.POST, instance=client)
         if form.is_valid():
             form.save()
-            return redirect(reverse('clients-home'))
+            return redirect(reverse('client-detail', kwargs={'pk': pk}))
     else:
         form = ClientForm(instance=client)
     return render(request, 'clients/update_client.html', {'form': form, 'client': client})
@@ -121,7 +121,7 @@ def update_contact(request, pk): # update a contact
         form = ContactForm(request.POST, instance=contact)
         if form.is_valid():
             form.save()
-            return redirect(reverse('contacts-home'))
+            return redirect(reverse('contact-detail', kwargs={'pk': pk}))
     else:
         form = ContactForm(instance=contact)
     return render(request, 'clients/update_contact.html', {'form': form, 'contact': contact})
@@ -133,7 +133,7 @@ def update_site(request, pk): # update a site
         form = SiteForm(request.POST, instance=site)
         if form.is_valid():
             form.save()
-            return redirect(reverse('sites-home'))
+            return redirect(reverse('site-detail', kwargs={'pk': pk}))
     else:
         form = SiteForm(instance=site)
     return render(request, 'clients/update_site.html', {'form': form, 'site': site})
