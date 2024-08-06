@@ -6,7 +6,7 @@ from clients.models import Client, Contact, Site
 class Ticket(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    is_resolved = models.ForeignKey('TicketUpdate', on_delete=models.CASCADE, related_name='resolved_ticket', null=True, blank=True)
+    is_resolved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='ticket_client', null=True, blank=True)
@@ -23,14 +23,13 @@ class Ticket(models.Model):
 class TicketUpdate(models.Model):
     update = models.TextField()
     tech = models.ForeignKey('Technician', on_delete=models.CASCADE, related_name='ticket_tech', null=True, blank=True)
-    is_resolved = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, related_name='ticket_update', null=True, blank=True)
 
 
     def __str__(self):
-        return f'{self.ticket.title} — Updated by {self.tech.first_name} {self.tech.last_name} — Resolved: {self.is_resolved}'
+        return f'{self.ticket.title} — Updated by {self.tech.first_name} {self.tech.last_name}'
     
 
 class Technician(models.Model):

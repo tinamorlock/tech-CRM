@@ -1,0 +1,15 @@
+{% extends 'support/_base.html' %}
+{% block content %}
+<div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
+    <h1 class="text-4xl mb-2">Ticket Updates for the Past 30 Days</h1>
+    {% for update in updates %}
+    <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
+        <div class="flex justify-between items-center pb-6">
+            <p class="text-2xl">Ticket #: {{ update.ticket.id }} | {{ update.update }} | Company: {{ update.ticket.client.company }}</p>
+            <a href="{% url 'updates-home'  %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

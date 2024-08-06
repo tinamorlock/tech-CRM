@@ -11,26 +11,26 @@
                 <span class="ml-3 text-xl">Logic Pro Support Tickets</span>
                 </a>
                 <nav class="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
-                <a href="{% url 'support-home' %}" class="mr-5 hover:text-gray-900">All Open Tickets</a> 
-                <a href="{% url 'support-home' %}" class="mr-5 hover:text-gray-900">Recent Ticket Updates</a> 
-                <a href="{% url 'support-home' %}" class="mr-5 hover:text-gray-900">All Technicians</a> 
+                <a href="{% url 'support-home' %}" class="mr-5 hover:text-gray-900">Open Tickets</a> 
+                <a href="{% url 'updates-home' %}" class="mr-5 hover:text-gray-900">Recent Updates</a> 
+                <a href="{% url 'techs-home' %}" class="mr-5 hover:text-gray-900">All Techs</a> 
                 </nav>
-                <a href="{% url 'support-home' %}">
+                <a href="{% url 'create-ticket' %}">
                     <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Create Ticket
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                         </svg>
                     </button>
                 </a> 
-                <a href="{% url 'support-home' %}">
-                    <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Ticket Update
+                <a href="{% url 'add-update' %}">
+                    <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Update
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                         </svg>
                     </button>
                 </a> 
-                <a href="{% url 'support-home' %}">
-                    <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Technician
+                <a href="{% url 'add-tech' %}">
+                    <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Tech
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                         </svg>
