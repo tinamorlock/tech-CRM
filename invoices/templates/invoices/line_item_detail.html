@@ -1,0 +1,24 @@
+{% extends 'invoices/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Line Item Detail</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <a href="{% url 'invoice-detail' line_item.invoice.id %}"><p><u>Invoice # {{ invoice.invoice_number }} for {{ invoice.client.company }}</u></a></p><br>
+                <p>Description: {{ line_item.description }} </p>
+                {% if line_item.eq_or_supplies_cost %}
+                    <p>Cost: ${{ line_item.eq_or_supplies_cost }}</p>
+                {% else %}
+                    <p>Hours: {{ line_item.num_hours }} at ${{ line_item.hourly_rate.hourly_rate }} per hour</p>
+                {% endif %}
+                <br><br>
+                <a href="{% url 'update-line-item' line_item.id %}"><p class="rounded bg-green-500 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

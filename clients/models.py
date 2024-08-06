@@ -25,6 +25,7 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='client_contact', null=True, blank=True)
+    invoice_contact = models.ForeignKey(Contact, on_delete=models.CASCADE, related_name='invoice_contact', null=True, blank=True)
 
 
     def __str__(self):

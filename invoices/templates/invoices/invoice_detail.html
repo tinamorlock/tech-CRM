@@ -1,0 +1,43 @@
+{% extends 'invoices/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Invoice {{ invoice.invoice_number }} for {{ client.company }}</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p>Invoice Created: {{ invoice.created_at }}</p>
+                <hr><br><br>
+                {% if line_items %}
+                    {% for item in line_items %}
+                        <p>{{ item.description }} — 
+                            {% if item.eq_or_supplies_cost %}
+                                ${{ item.eq_or_supplies_cost }}
+                            {% else %}
+                                {{ item.num_hours }} hours at ${{ item.hourly_rate.hourly_rate }} per hour | 
+                            {% endif %}
+                            <a href="{% url 'line-item-detail' item.id %}"><u>View Line Item</u></a> |    
+                            <a href="{% url 'add-line-item' %}"><u>Add Line Item</u></a>
+                        </p>
+                    {% endfor %}
+                    Invoice total: ${{ total|floatformat:2 }}<br><br>
+                {% else %}
+                    <p>No line items for this invoice.</p><br><br>
+                    <a href="{% url 'add-line-item' %}">
+                        <button class="inline-flex items-center bg-blue-100 border-0 py-2 px-5 focus:outline-none hover:bg-blue-200 rounded text-base mt-4 md:mt-0">Add Line Item
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </a>
+                {% endif %}
+                
+                <br><br>
+                <a href="{% url 'update-invoice' invoice.id %}"><p class="rounded bg-green-500 px-6 py-2 w-40">Update Invoice</p></a><br><br>
+                <a href="{% url 'generate-pdf' invoice.id %}"><p style="margin-bottom: 100px;" class="rounded bg-blue-500 px-6 py-2 w-40">Export to PDF</p></a>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

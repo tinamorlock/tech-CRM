@@ -1,12 +1,12 @@
 {% extends 'clients/_base.html' %}
 {% block content %}
-<div class="sm:w-2/3 mx-auto px-10">
+<div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
     <h1 class="text-4xl mb-2">Clients</h1>
     {% for client in clients %}
     <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
         <div class="flex justify-between items-center pb-6">
             <p class="text-2xl">{{ client.company }}</p>
-            <a href="{% url 'client-detail' client.pk %}"><p class="rounded-full bg-green-200 px-6 py-2">View</p></a>
+            <a href="{% url 'client-detail' client.pk %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
             </p>
         </div>
     </div>
