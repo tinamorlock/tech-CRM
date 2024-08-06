@@ -5,6 +5,7 @@ from .views import add_invoice, add_line_item
 from .views import update_invoice, update_line_item
 from .views import invoice_detail, line_item_detail
 from .views import delete_invoice, delete_line_item
+from .views import generate_pdf
 
 urlpatterns = [
     path('invoices/', index, name='invoices-home'),
@@ -16,4 +17,5 @@ urlpatterns = [
     path('invoices/update/line_item/<int:line_item_id>/', update_line_item, name='update-line-item'),
     path('invoices/delete/<int:invoice_id>/', delete_invoice, name='delete-invoice'),
     path('invoices/delete/line_item/<int:line_item_id>/', delete_line_item, name='delete-line-item'),
+    path('invoices/pdf/<int:invoice_id>/', generate_pdf, name='generate-pdf'),
 ]

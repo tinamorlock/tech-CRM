@@ -33,7 +33,8 @@
                 {% endif %}
                 
                 <br><br>
-                <a href="{% url 'update-invoice' invoice.id %}"><p style="margin-bottom: 100px;" class="rounded bg-green-500 px-6 py-2 w-40">Update Invoice</p></a><br><br>
+                <a href="{% url 'update-invoice' invoice.id %}"><p class="rounded bg-green-500 px-6 py-2 w-40">Update Invoice</p></a><br><br>
+                <a href="{% url 'generate-pdf' invoice.id %}"><p style="margin-bottom: 100px;" class="rounded bg-blue-500 px-6 py-2 w-40">Export to PDF</p></a>
             </div>
         </div>
     </div>

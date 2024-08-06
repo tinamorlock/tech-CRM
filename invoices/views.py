@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.http import HttpResponse
 
 from .models import Invoice, LineItem
 from clients.models import Client, Contact
@@ -151,3 +154,33 @@ def delete_line_item(request, line_item_id):
         'line_item': line_item,
     }
     return render(request, 'invoices/delete_line_item.html', context)
+
+
+# generate a PDF invoice
+
+
+def generate_pdf(request, invoice_id):
+    invoice = get_object_or_404(Invoice, pk=invoice_id)
+    line_items = LineItem.objects.filter(invoice=invoice)
+    client = get_object_or_404(Client, id=invoice.client.id)
+    total = 0.00
+    for line_item in line_items:
+        if line_item.eq_or_supplies_cost:
+            total += float(line_item.eq_or_supplies_cost)
+        else:
+            total += float(line_item.hourly_rate.hourly_rate * line_item.num_hours)
+    context = {
+        'invoice': invoice,
+        'line_items': line_items,
+        'total': total,
+        'client': client,
+    }
+    template_path = 'invoices/pdf_invoice.html'
+    template = get_template(template_path)
+    html = template.render(context)
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename={invoice.invoice_number}.pdf'  
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

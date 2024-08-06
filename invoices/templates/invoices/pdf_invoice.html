@@ -1,0 +1,37 @@
+<!-- templates/invoices/pdf_invoice.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+</head>
+<body>
+    <h1>Invoice #{{ invoice.invoice_number }}</h1>
+    <p>Client: {{ client.company }}</p>
+    <p>Date: {{ invoice.created_at }}</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in line_items %}
+            <tr>
+                <td>{{ item.description }}</td>
+                {% if item.eq_or_supplies_cost %}
+                    <td> 1 </td>
+                    <td>{{ item.eq_or_supplies_cost }}</td>
+                {% else %}
+                    <td>{{ item.num_hours }} hours at</td>
+                    <td> ${{ item.hourly_rate.hourly_rate }} per hour</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total: ${{ total|floatformat:2 }}</p><br><br>
+    Due by: {{ invoice.due_date }}
+</body>
+</html>
