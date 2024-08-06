@@ -1,0 +1,25 @@
+{% extends 'leads/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">{{ lead.first_name }} {{ lead.last_name }}</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p>Company: {{ lead.company }}</p>
+                <p>Email: {{ lead.email }} | <a href="mailto:{{ lead.email }}"><u>Send Email</u></p>
+                <p>Phone: {{ lead.phone }}</p>
+                <p>Source: {{ lead.source }}</p><br><br>
+                <hr><br><br>
+                <h1 class="text-2xl font-bold">Notes</h1><br>
+                {% for note in lead_notes %}
+                    <p><a href="{% url 'lead-note-detail' note.pk %}"><u>{{ note.note }} on {{ note.created_at }}</u></a></p>
+                {% endfor %}
+                <br><br>
+                <a href="{% url 'update-lead' lead.id%}"><p style="margin-bottom: 100px;" class="rounded bg-green-500 px-6 py-2 w-40">Update Lead</p></a><br><br>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        
