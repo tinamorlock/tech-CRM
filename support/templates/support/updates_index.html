@@ -5,8 +5,8 @@
     {% for update in updates %}
     <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
         <div class="flex justify-between items-center pb-6">
-            <p class="text-2xl">Ticket #: {{ update.ticket.id }} | {{ update.update }} | Company: {{ update.ticket.client.company }}</p>
-            <a href="{% url 'updates-home'  %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
+            <p class="text-2xl">Ticket #: {{ update.ticket.id }} | {{ update.update }} | {{ update.ticket.client.company }}</p>
+            <a href="{% url 'view-update' update.pk%}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
             </p>
         </div>
     </div>

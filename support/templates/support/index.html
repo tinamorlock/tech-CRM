@@ -5,8 +5,8 @@
     {% for ticket in tickets %}
     <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
         <div class="flex justify-between items-center pb-6">
-            <p class="text-2xl">Ticket #: {{ ticket.id }} | {{ ticket.title }} | Company: {{ ticket.client.company }}</p>
-            <a href="{% url 'support-home'  %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
+            <p class="text-2xl">Ticket #: {{ ticket.id }} | {{ ticket.title }} | {{ ticket.client.company }}</p>
+            <a href="{% url 'view-ticket' ticket.pk %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
             </p>
         </div>
     </div>

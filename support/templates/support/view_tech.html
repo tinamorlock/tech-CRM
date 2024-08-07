@@ -1,0 +1,32 @@
+{% extends 'support/_base.html' %}
+
+{% block content %}
+
+    <div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Technician {{ update.tech.first_name }} {{ update.tech.last_name }}
+            </h1><br>
+        </h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p><b>Technician Info</b></p><br>
+                <p>Phone: {{ tech.phone }}</p><br>
+                <p>Email: {{ tech.first_name }} {{ tech.last_name }}
+                     | <a href="mailto:{{ tech.email }}"> <u>Send Email</u></a>
+                </p><br>
+                <br>
+                <br><hr><br>
+                <h1 class="text-2xl font-bold">Most Recent Ticket Updates</h1><br>
+                <ul>
+                {% for update in updates %}
+                    <li>Ticket #: {{ update.ticket.id }} | {{ update.updated_at }} - {{ update.update }} | Company: {{ update.ticket.client.company }}</li>
+                {% endfor %}
+                </ul>
+                <br><br>
+                <a href="{% url 'techs-home' %}"><p class="rounded bg-green-500 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

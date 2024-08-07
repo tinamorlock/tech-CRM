@@ -6,7 +6,7 @@
     <div class="border rounded px-12 py-8 my-6 hover:bg-gray-50">
         <div class="flex justify-between items-center pb-6">
             <p class="text-2xl">{{ tech.first_name }} {{ tech.last_name }}</p>
-            <a href="{% url 'techs-home'  %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
+            <a href="{% url 'view-tech' tech.pk %}"><p class="rounded bg-green-500 px-6 py-2">View</p></a>
             </p>
         </div>
     </div>

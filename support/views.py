@@ -67,3 +67,32 @@ def add_tech(request):
     else:
         form = TechnicianForm()
     return render(request, 'support/add_tech.html', {'form': form})
+
+
+def view_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    updates = TicketUpdate.objects.filter(ticket=ticket)
+    context = {
+        'ticket': ticket,
+        'updates': updates
+    }
+    return render(request, 'support/view_ticket.html', context)
+
+
+def view_update(request, pk):
+    update = get_object_or_404(TicketUpdate, pk=pk)
+    context = {
+        'update': update
+    }
+    return render(request, 'support/view_update.html', context)
+
+
+def view_tech(request, pk):
+    tech = get_object_or_404(Technician, pk=pk)
+    # gets last five updates this tech has made
+    updates = TicketUpdate.objects.filter(tech=tech).order_by('-created_at')[:5]
+    context = {
+        'tech': tech,
+        'updates': updates,
+    }
+    return render(request, 'support/view_tech.html', context)

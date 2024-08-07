@@ -1,0 +1,33 @@
+{% extends 'support/_base.html' %}
+
+{% block content %}
+
+    <div style="margin-bottom: 100px;" class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Update for Ticket # {{ update.ticket.id }} for {{ update.ticket.client.company}} 
+            </h1><br>
+        </h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p><b>Ticket Info</b></p><br>
+                <p>Title: {{ update.ticket.title }}</p><br>
+                <p>Description: {{ update.ticket.description }}</p><br>
+                <p>Location: {{ update.ticket.site.site_name }}</p><br>
+                <p>Contact: {{ update.ticket.contact.first_name }} {{ update.ticket.contact.last_name }}
+                     | <a href="mailto:{{ update.ticket.contact.email }}"> <u>Send Email</u></a>
+                </p><br>
+                <br>
+                {% if ticket.is_resolved %}
+                    <p>This ticket has been resolved by {{ update.tech.first_name }} {{ update.tech.last_name }}.</p>
+                {% endif %}
+                <br><hr><br><br>
+                <p>{{ update.updated_at }} - {{ update.update }} | 
+                    {{ update.tech.first_name }} {{ update.tech.last_name }}</p><br>
+                
+                <a href="{% url 'updates-home' %}"><p class="rounded bg-green-500 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

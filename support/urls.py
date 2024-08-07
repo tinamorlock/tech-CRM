@@ -2,6 +2,7 @@ from django.urls import path, include
 
 from .views import index, tech_index, ticket_update_index
 from .views import create_ticket, add_update, add_tech
+from .views import view_ticket, view_update, view_tech
 
 urlpatterns = [
     path('support/', index, name='support-home'),
@@ -10,4 +11,7 @@ urlpatterns = [
     path('support/create/', create_ticket, name='create-ticket'),
     path('support/update/', add_update, name='add-update'),
     path('support/tech/', add_tech, name='add-tech'),
+    path('support/ticket/<int:pk>/', view_ticket, name='view-ticket'),
+    path('support/update/<int:pk>/', view_update, name='view-update'),
+    path('support/tech/<int:pk>/', view_tech, name='view-tech'),
 ]
