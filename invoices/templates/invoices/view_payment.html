@@ -1,0 +1,21 @@
+{% extends 'invoices/_base.html' %}
+
+{% block content %}
+
+    <div class="sm:w-2/3 mx-auto px-10">
+        <h1 class="text-2xl font-bold">Payment Detail</h1><br>
+        <div class="flex justify-between">
+            <div>
+                <p><b> Payment from {{ payment.client.company }}</b></p>
+                <p>Payment Date: {{ payment.payment_date }}</p>
+                <p>Payment Amount: ${{ payment.payment_amount|floatformat:2 }}</p>
+                <p>New Balance: ${{ payment.client.balance|floatformat:2 }}</p>
+                <br><br>
+                <a href="{% url 'update-payment' payment.pk%}"><p class="rounded bg-green-500 px-6 py-2 w-24">Update</p></a><br><br>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+        

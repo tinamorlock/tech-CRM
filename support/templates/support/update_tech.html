@@ -1,0 +1,15 @@
+{% extends 'support/_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="margin-bottom: 100px;" class="container mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">Update Technician</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class="rounded px-5 py-2 bg-green-500 hover:cursor-pointer" type="submit" value="Update">
+        <a href="{% url 'delete-tech' tech.pk %}" class="rounded px-6 py-2.5 bg-red-500 hover:cursor-pointer">Delete</a>
+
+    </form>
+</div>
+{% endblock %}

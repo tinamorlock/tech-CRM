@@ -36,6 +36,12 @@
                     {{ employee.first_name }} {{ employee.last_name }} — {{ employee.job_title }} — 
                 <a href="mailto:{{ employee.email }}"><u>Email</u></a></p>
                 {% endfor %}
+                <hr><br><br>
+                <h1 class="text-2xl font-bold">{{ clients.company }}'s Open Support Tickets</h1><br>
+                {% for ticket in tickets %}
+                    <p>Ticket # {{ ticket.pk }} — {{ ticket.title }} | 
+                <a href="{% url 'view-ticket' ticket.pk %}"><u>View Ticket</u></a></p>
+                {% endfor %}
                 <br><br>
                 <a href="{% url 'update-client' clients.pk %}"><p style="margin-bottom: 100px;" class="rounded bg-green-500 px-6 py-2 w-40">Update Client</p></a><br><br>
             </div>

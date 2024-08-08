@@ -72,9 +72,12 @@ def add_tech(request):
 def view_ticket(request, pk):
     ticket = get_object_or_404(Ticket, pk=pk)
     updates = TicketUpdate.objects.filter(ticket=ticket)
+    # create a variable to the last update on the ticket
+    last_update = TicketUpdate.objects.filter(ticket=ticket).order_by('-created_at').first()
     context = {
         'ticket': ticket,
-        'updates': updates
+        'updates': updates,
+        'last_update': last_update
     }
     return render(request, 'support/view_ticket.html', context)
 
@@ -96,3 +99,77 @@ def view_tech(request, pk):
         'updates': updates,
     }
     return render(request, 'support/view_tech.html', context)
+
+
+def update_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('view-ticket', kwargs={'pk': pk}))
+    else:
+        form = TicketForm(instance=ticket)
+    return render(request, 'support/update_ticket.html', {'form': form, 'ticket': ticket})
+
+
+def update_update(request, pk):
+    update = get_object_or_404(TicketUpdate, pk=pk)
+    if request.method == 'POST':
+        form = TicketUpdateForm(request.POST, instance=update)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('view-update', kwargs={'pk': pk}))
+    else:
+        form = TicketUpdateForm(instance=update)
+    return render(request, 'support/update_update.html', {'form': form, 'update': update})
+
+
+def update_tech(request, pk):
+    tech = get_object_or_404(Technician, pk=pk)
+    if request.method == 'POST':
+        form = TechnicianForm(request.POST, instance=tech)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('view-tech', kwargs={'pk': pk}))
+    else:
+        form = TechnicianForm(instance=tech)
+    return render(request, 'support/update_tech.html', {'form': form, 'tech': tech})
+
+
+def delete_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if request.method == 'POST':
+        ticket.delete()
+        return redirect(reverse('support-home'))
+    return render(request, 'support/delete_ticket.html', {'ticket': ticket})
+
+
+def delete_update(request, pk):
+    update = get_object_or_404(TicketUpdate, pk=pk)
+    if request.method == 'POST':
+        update.delete()
+        return redirect(reverse('updates-home'))
+    return render(request, 'support/delete_update.html', {'update': update})
+
+
+def delete_tech(request, pk):
+    tech = get_object_or_404(Technician, pk=pk)
+    if request.method == 'POST':
+        tech.delete()
+        return redirect(reverse('techs-home'))
+    return render(request, 'support/delete_tech.html', {'tech': tech}) 
+
+
+def mark_resolved(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if ticket.is_resolved:
+        return redirect(reverse('view-ticket', kwargs={'pk': pk}))
+    else:
+        ticket.is_resolved = True
+        # set tech to last tech who updated ticket
+        last_update = TicketUpdate.objects.filter(ticket=ticket).order_by('-created_at').first()
+        # add update that says it's resolved and assign the tech from the last_update
+        TicketUpdate.objects.create(update='Ticket Resolved', tech=last_update.tech, ticket=ticket)
+        ticket.save()
+        return redirect(reverse('view-ticket', kwargs={'pk': pk}))

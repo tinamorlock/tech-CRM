@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Invoice, LineItem
+from .models import Invoice, LineItem, Payment
 
 
 class InvoiceForm(forms.ModelForm):
@@ -24,4 +24,14 @@ class LineItemForm(forms.ModelForm):
             'hourly_rate',
             'num_hours',
             'invoice',
+        ]
+
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = [
+            'payment_amount',
+            'payment_date',
+            'client',
         ]

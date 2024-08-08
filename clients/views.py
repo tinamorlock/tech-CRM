@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from .models import Client, Contact, Site
+from support.models import Ticket, TicketUpdate
 from .forms import ClientForm, ContactForm, SiteForm
+
 
 
 # list views
@@ -75,11 +77,14 @@ def client_detail(request, pk): # client detail
     clients = get_object_or_404(Client, pk=pk)
     sites = Site.objects.filter(client=clients)
     employees = Contact.objects.filter(company=clients)
+    # get all open tickets for the client, filter by is_resolved
+    tickets = Ticket.objects.filter(client=clients, is_resolved=False)
     print(employees)
     context = {
         'clients': clients,
         'sites': sites,
         'employees': employees,
+        'tickets': tickets,
     }
     return render(request, 'clients/client_detail.html', context)
 

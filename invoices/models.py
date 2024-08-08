@@ -28,3 +28,14 @@ class LineItem(models.Model):
 
     def __str__(self):
         return f'{self.description} — {self.invoice.invoice_number} for {self.invoice.client.company}'
+    
+
+class Payment(models.Model):
+    payment_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    payment_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='client_payment', null=True, blank=True)
+    
+    def __str__(self):
+        return f'${self.payment_amount} on {self.payment_date} for {self.client.company}'

@@ -31,7 +31,13 @@
             {% endfor %}
         </tbody>
     </table>
-    <p>Total: ${{ total|floatformat:2 }}</p><br><br>
-    Due by: {{ invoice.due_date }}
+    <p>Invoice Total: ${{ invoice_total|floatformat:2 }}</p>
+    <p>Payments Made: ${{ payments_made|floatformat:2 }}
+    <p>Past Due Amount: ${{ pastdue_amt|floatformat:2 }}</p>
+    <p>Balance Due: ${{ grand_total|floatformat:2 }}</p>
+    
+        Due by: {{ invoice.due_date }}
+    
+    
 </body>
 </html>
