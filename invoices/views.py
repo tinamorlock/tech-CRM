@@ -23,6 +23,7 @@ def index(request): # this will list all invoices
     return render(request, 'invoices/index.html', context)
 
 
+
 def list_payments(request):
     payments = Payment.objects.all()
     context = {
